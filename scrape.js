@@ -5,8 +5,20 @@ import fs from "fs";
 const URL = "https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1";
 
 async function scrape() {
-    const res = await fetch(URL);
+
+    const res = await fetch(URL, {
+        headers: {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
+            "Accept-Language": "es-ES,es;q=0.9",
+            "Accept": "text/html"
+        }
+    });
+
     const html = await res.text();
+
+    // SOLO PARA COMPROBAR (lo quitaremos luego)
+    console.log("HTML length:", html.length);
+
     const $ = cheerio.load(html);
 
     const items = [];
@@ -29,7 +41,7 @@ async function scrape() {
         // Hora
         const hour = $(el).find(".match_hour").text().trim();
 
-        // Estado real
+        // Estado
         const statusRaw = $(el).find(".match-status-label b").text().trim();
         let status = "Programado";
         if (statusRaw === "Fin") status = "Finalizado";
@@ -38,37 +50,33 @@ async function scrape() {
         // Marcador
         const r1 = $(el).find(".r1").text().trim();
         const r2 = $(el).find(".r2").text().trim();
-        const score = (r1 && r2) ? `${r1} - ${r2}` : "";
+        const score = r1 && r2 ? `${r1} - ${r2}` : "";
 
-        // Minuto (si existe)
+        // Minuto
         const minute = $(el).find(".minute, .liveMinute, .match_minute").text().trim();
 
-        // Título del item
+        // RSS TITLE
         let title = `${home} vs ${away}`;
         if (score) title = `${home} ${score} ${away}`;
-        if (status === "Programado") title += " (Próximo)" ;
+        if (status === "Programado") title += " (Próximo)";
         if (status === "En juego") title += ` (En juego ${minute})`;
 
-        // Descripción más bonita
+        // DESCRIPTION
         let description = `
-            <b>${home}</b> vs <b>${away}</b><br><br>
-            🏟 <b>Competición:</b> Primera Andaluza Huelva G1<br>
-            📅 <b>Fecha:</b> ${date}<br>
-            ⏰ <b>Hora:</b> ${hour || "Sin hora"}<br>
-            📌 <b>Estado:</b> ${status}<br>
+            <b>${home}</b> vs <b>${away}</b><br>
+            📅 Fecha: ${date}<br>
+            ⏰ Hora: ${hour || "Sin hora"}<br>
+            📌 Estado: ${status}<br>
         `;
 
-        if (score) description += `⚽ <b>Resultado:</b> ${score}<br>`;
+        if (score) description += `⚽ Resultado: ${score}<br>`;
+        if (minute) description += `🕒 Minuto: ${minute}<br>`;
 
-        if (minute) description += `🕒 <b>Minuto:</b> ${minute}<br>`;
-
-        if (homeImg && awayImg) {
-            description += `
-                <br>
-                <img src="${homeImg}" height="40" /> 
-                <img src="${awayImg}" height="40" />
-            `;
-        }
+        description += `
+            <br>
+            <img src="${homeImg}" height="40"> 
+            <img src="${awayImg}" height="40">
+        `;
 
         items.push(`
             <item>
