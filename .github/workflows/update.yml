@@ -1,0 +1,33 @@
+name: Actualizar RSS automáticamente
+
+on:
+  schedule:
+    - cron: "0 * * * *"   # Cada hora
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Instalar Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Instalar dependencias
+      run: npm install axios cheerio
+
+    - name: Ejecutar scraper
+      run: node scrape.js
+
+    - name: Commit y push
+      run: |
+        git config --global user.email "action@github.com"
+        git config --global user.name "GitHub Action"
+        git add feed.xml
+        git commit -m "RSS actualizado automáticamente" || echo "No hay cambios"
+        git push
