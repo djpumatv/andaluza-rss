@@ -18,10 +18,8 @@ async function scrape() {
 });
 
 
-    const html = await res.text();
-
-    // SOLO PARA COMPROBAR (lo quitaremos luego)
-    console.log("HTML length:", html.length);
+    const html = await response.text();
+console.log("HTML length:", html.length);
 
     const $ = cheerio.load(html);
 
