@@ -6,69 +6,60 @@ const URL = "https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1
 
 async function scrape() {
 
-        // Abrimos navegador real (Puppeteer)
+    // Lanzar Chrome sin sandbox (NECESARIO en GitHub Actions)
     const browser = await puppeteer.launch({
-        headless: "new"
+        headless: "new",
+        args: [
+            "--no-sandbox",
+            "--disable-setuid-sandbox"
+        ]
     });
 
     const page = await browser.newPage();
 
     await page.setUserAgent(
-        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
     );
 
     await page.goto(URL, { waitUntil: "networkidle2" });
 
-    // Extraemos el HTML REAL que Besoccer sí carga
     const html = await page.content();
     console.log("HTML length:", html.length);
 
-    const $ = cheerio.load(html);
-
     await browser.close();
 
-
+    const $ = cheerio.load(html);
     const items = [];
 
     $(".match-link").each((i, el) => {
         const link = $(el).attr("href");
         if (!link) return;
 
-        // Equipos
         const home = $(el).find(".team_left .name").text().trim();
         const away = $(el).find(".team_right .name").text().trim();
 
-        // Escudos
         const homeImg = $(el).find(".team_left img").attr("src") || "";
         const awayImg = $(el).find(".team_right img").attr("src") || "";
 
-        // Fecha
         const date = $(el).find(".date").text().trim() || $(el).find(".date-transform").text().trim();
-
-        // Hora
         const hour = $(el).find(".match_hour").text().trim();
 
-        // Estado
         const statusRaw = $(el).find(".match-status-label b").text().trim();
         let status = "Programado";
         if (statusRaw === "Fin") status = "Finalizado";
         if (statusRaw === "En juego") status = "En juego";
 
-        // Marcador
         const r1 = $(el).find(".r1").text().trim();
         const r2 = $(el).find(".r2").text().trim();
         const score = r1 && r2 ? `${r1} - ${r2}` : "";
 
-        // Minuto
         const minute = $(el).find(".minute, .liveMinute, .match_minute").text().trim();
 
-        // RSS TITLE
         let title = `${home} vs ${away}`;
         if (score) title = `${home} ${score} ${away}`;
         if (status === "Programado") title += " (Próximo)";
         if (status === "En juego") title += ` (En juego ${minute})`;
 
-        // DESCRIPTION
         let description = `
             <b>${home}</b> vs <b>${away}</b><br>
             📅 Fecha: ${date}<br>
