@@ -6,13 +6,17 @@ const URL = "https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1
 
 async function scrape() {
 
-    const res = await fetch(URL, {
-        headers: {
-            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)",
-            "Accept-Language": "es-ES,es;q=0.9",
-            "Accept": "text/html"
-        }
-    });
+    const response = await fetch(URL, {
+  headers: {
+    "User-Agent":
+      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
+    "Accept": "text/html",
+    "Accept-Language": "es-ES,es;q=0.9",
+    "Referer": "https://www.google.com/",
+    "Connection": "keep-alive"
+  }
+});
+
 
     const html = await res.text();
 
