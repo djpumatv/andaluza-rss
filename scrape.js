@@ -54,12 +54,19 @@ async function scrape() {
         // ------------------------
         //   TÍTULO MEJORADO
         // ------------------------
-        let title = `${home} vs ${away}`;
+       let title = `${home} vs ${away}`;
 
-        if (score) title = `${home} ${score} ${away}`;
+// Si tiene hora, la añadimos
+if (hour) title += ` — ${hour}`;
 
-        if (status === "En juego") title += " (EN JUEGO)";
-        else if (status === "Finalizado") title += " (FINAL)";
+// Si hay resultado, sustituye todo por el marcador
+if (score) title = `${home} ${score} ${away}`;
+
+// Si está en juego
+if (status === "En juego") {
+    title = `${home} ${score || ""} ${away} (En juego ${minute})`.trim();
+}
+
         // No añadimos “Próximo”
 
         // ------------------------
