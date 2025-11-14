@@ -1,65 +1,98 @@
-const axios = require("axios");
-const cheerio = require("cheerio");
-const fs = require("fs");
+import fetch from "node-fetch";
+import * as cheerio from "cheerio";
+import fs from "fs";
 
-async function generateRSS() {
-    // URL base de BeSoccer para la competición
-    const url = "https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1";
+const URL = "https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1";
 
-    try {
-        const response = await axios.get(url);
-        const $ = cheerio.load(response.data);
+async function scrape() {
+    const res = await fetch(URL);
+    const html = await res.text();
+    const $ = cheerio.load(html);
 
-        let items = "";
+    const items = [];
 
-        $(".match-list-item").each((i, el) => {
-            const local = $(el).find(".team-local .name").text().trim();
-            const away = $(el).find(".team-visitor .name").text().trim();
+    $(".match-link").each((i, el) => {
+        const link = $(el).attr("href");
+        if (!link) return;
 
-            const date = $(el).find(".match-date").text().trim();
-            const hour = $(el).find(".match-hour").text().trim();
+        // Equipos
+        const home = $(el).find(".team_left .name").text().trim();
+        const away = $(el).find(".team_right .name").text().trim();
 
-            let status = $(el).find(".status").text().trim();
-            let score = $(el).find(".score").text().trim();
+        // Escudos
+        const homeImg = $(el).find(".team_left img").attr("src") || "";
+        const awayImg = $(el).find(".team_right img").attr("src") || "";
 
-            let description = "";
+        // Fecha
+        const date = $(el).find(".date").text().trim() || $(el).find(".date-transform").text().trim();
 
-            if (status.includes("Final")) {
-                description = `Finalizado: ${score}`;
-            } else if (status.includes("'") || status.includes("Min")) {
-                description = `En juego: ${score}`;
-            } else if (hour) {
-                description = `Programado: ${date} - ${hour}`;
-            } else {
-                description = `Programado: ${date}`;
-            }
+        // Hora
+        const hour = $(el).find(".match_hour").text().trim();
 
-            items += `
+        // Estado real
+        const statusRaw = $(el).find(".match-status-label b").text().trim();
+        let status = "Programado";
+        if (statusRaw === "Fin") status = "Finalizado";
+        if (statusRaw === "En juego") status = "En juego";
+
+        // Marcador
+        const r1 = $(el).find(".r1").text().trim();
+        const r2 = $(el).find(".r2").text().trim();
+        const score = (r1 && r2) ? `${r1} - ${r2}` : "";
+
+        // Minuto (si existe)
+        const minute = $(el).find(".minute, .liveMinute, .match_minute").text().trim();
+
+        // Título del item
+        let title = `${home} vs ${away}`;
+        if (score) title = `${home} ${score} ${away}`;
+        if (status === "Programado") title += " (Próximo)" ;
+        if (status === "En juego") title += ` (En juego ${minute})`;
+
+        // Descripción más bonita
+        let description = `
+            <b>${home}</b> vs <b>${away}</b><br><br>
+            🏟 <b>Competición:</b> Primera Andaluza Huelva G1<br>
+            📅 <b>Fecha:</b> ${date}<br>
+            ⏰ <b>Hora:</b> ${hour || "Sin hora"}<br>
+            📌 <b>Estado:</b> ${status}<br>
+        `;
+
+        if (score) description += `⚽ <b>Resultado:</b> ${score}<br>`;
+
+        if (minute) description += `🕒 <b>Minuto:</b> ${minute}<br>`;
+
+        if (homeImg && awayImg) {
+            description += `
+                <br>
+                <img src="${homeImg}" height="40" /> 
+                <img src="${awayImg}" height="40" />
+            `;
+        }
+
+        items.push(`
             <item>
-                <title>${local} vs ${away}</title>
-                <description>${description}</description>
-                <pubDate>${date} ${hour}</pubDate>
-                <guid>${local.replace(/ /g, "")}-${away.replace(/ /g, "")}-${i}</guid>
-            </item>`;
-        });
+                <title><![CDATA[${title}]]></title>
+                <link>${link}</link>
+                <description><![CDATA[${description}]]></description>
+                <guid>${link}</guid>
+            </item>
+        `);
+    });
 
-        const rssFeed = `
-        <?xml version="1.0" encoding="UTF-8"?>
+    const rss = `
         <rss version="2.0">
             <channel>
-                <title>Primera Andaluza Huelva Grupo 1 - Partidos Automáticos</title>
-                <link>${url}</link>
-                <description>Feed automático actualizado desde BeSoccer</description>
-                ${items}
+                <title>Primera Andaluza Huelva G1 - RSS</title>
+                <link>${URL}</link>
+                <description>Resultados, partidos en vivo y próximos encuentros</description>
+                ${items.join("\n")}
             </channel>
-        </rss>`;
+        </rss>
+    `;
 
-        fs.writeFileSync("feed.xml", rssFeed);
-        console.log("RSS generado correctamente.");
-
-    } catch (err) {
-        console.error("Error al generar RSS:", err);
-    }
+    fs.writeFileSync("feed.xml", rss.trim());
+    console.log("RSS actualizado correctamente ✔");
 }
 
-generateRSS();
+scrape();
