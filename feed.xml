@@ -1,2 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"><channel></channel></rss>
+<rss version="2.0">
+            <channel>
+                <title>Primera Andaluza Huelva G1 - RSS</title>
+                <link>https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1</link>
+                <description>Resultados, partidos en vivo y próximos encuentros</description>
+                
+            </channel>
+        </rss>
