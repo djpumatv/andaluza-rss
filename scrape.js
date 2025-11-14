@@ -1,4 +1,4 @@
-import fetch from "node-fetch";
+import puppeteer from "puppeteer";
 import * as cheerio from "cheerio";
 import fs from "fs";
 
@@ -6,22 +6,27 @@ const URL = "https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1
 
 async function scrape() {
 
-    const response = await fetch(URL, {
-  headers: {
-    "User-Agent":
-      "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36",
-    "Accept": "text/html",
-    "Accept-Language": "es-ES,es;q=0.9",
-    "Referer": "https://www.google.com/",
-    "Connection": "keep-alive"
-  }
-});
+        // Abrimos navegador real (Puppeteer)
+    const browser = await puppeteer.launch({
+        headless: "new"
+    });
 
+    const page = await browser.newPage();
 
-    const html = await response.text();
-console.log("HTML length:", html.length);
+    await page.setUserAgent(
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36"
+    );
+
+    await page.goto(URL, { waitUntil: "networkidle2" });
+
+    // Extraemos el HTML REAL que Besoccer sí carga
+    const html = await page.content();
+    console.log("HTML length:", html.length);
 
     const $ = cheerio.load(html);
+
+    await browser.close();
+
 
     const items = [];
 
