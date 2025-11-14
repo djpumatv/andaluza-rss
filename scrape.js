@@ -6,17 +6,12 @@ const URL = "https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1
 
 async function scrape() {
 
-    // Lanzar Chrome sin sandbox (NECESARIO en GitHub Actions)
     const browser = await puppeteer.launch({
         headless: "new",
-        args: [
-            "--no-sandbox",
-            "--disable-setuid-sandbox"
-        ]
+        args: ["--no-sandbox", "--disable-setuid-sandbox"]
     });
 
     const page = await browser.newPage();
-
     await page.setUserAgent(
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
     );
@@ -41,13 +36,8 @@ async function scrape() {
         const homeImg = $(el).find(".team_left img").attr("src") || "";
         const awayImg = $(el).find(".team_right img").attr("src") || "";
 
-        const date = $(el).find(".date").text().trim() || $(el).find(".date-transform").text().trim();
+        const date = $(el).find(".date, .date-transform").text().trim();
         const hour = $(el).find(".match_hour").text().trim();
-
-        const statusRaw = $(el).find(".match-status-label b").text().trim();
-        let status = "Programado";
-        if (statusRaw === "Fin") status = "Finalizado";
-        if (statusRaw === "En juego") status = "En juego";
 
         const r1 = $(el).find(".r1").text().trim();
         const r2 = $(el).find(".r2").text().trim();
@@ -55,24 +45,42 @@ async function scrape() {
 
         const minute = $(el).find(".minute, .liveMinute, .match_minute").text().trim();
 
-        let title = `${home} vs ${away}`;
-        if (score) title = `${home} ${score} ${away}`;
-        if (status === "Programado") title += " (Próximo)";
-        if (status === "En juego") title += ` (En juego ${minute})`;
+        const statusRaw = $(el).find(".match-status-label b").text().trim();
+        let status = "Programado";
 
+        if (statusRaw === "Fin") status = "Finalizado";
+        if (statusRaw === "En juego") status = "En juego";
+
+        // ------------------------
+        //   TÍTULO MEJORADO
+        // ------------------------
+        let title = `${home} vs ${away}`;
+
+        if (score) title = `${home} ${score} ${away}`;
+
+        if (status === "En juego") title += " (EN JUEGO)";
+        else if (status === "Finalizado") title += " (FINAL)";
+        // No añadimos “Próximo”
+
+        // ------------------------
+        //   DESCRIPCIÓN
+        // ------------------------
         let description = `
             <b>${home}</b> vs <b>${away}</b><br>
             📅 Fecha: ${date}<br>
-            ⏰ Hora: ${hour || "Sin hora"}<br>
-            📌 Estado: ${status}<br>
         `;
+
+        if (hour) description += `⏰ Hora: ${hour}<br>`;
+        else description += `⏰ Hora: Sin hora<br>`;
+
+        description += `📌 Estado: ${status}<br>`;
 
         if (score) description += `⚽ Resultado: ${score}<br>`;
         if (minute) description += `🕒 Minuto: ${minute}<br>`;
 
         description += `
             <br>
-            <img src="${homeImg}" height="40"> 
+            <img src="${homeImg}" height="40">
             <img src="${awayImg}" height="40">
         `;
 
