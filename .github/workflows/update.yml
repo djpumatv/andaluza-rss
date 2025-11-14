@@ -2,7 +2,7 @@ name: Actualizar RSS automáticamente
 
 on:
   schedule:
-    - cron: "0 * * * *"   # Cada hora
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,7 @@ jobs:
     - name: Instalar Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 20    # <-- FIX AQUÍ
 
     - name: Instalar dependencias
       run: npm install axios cheerio
