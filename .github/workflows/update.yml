@@ -2,32 +2,37 @@ name: Actualizar RSS automáticamente
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 * * * *"   # se ejecuta cada hora
   workflow_dispatch:
+
+permissions:
+  contents: write   # 👈 necesario para hacer commit y push
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
+    - name: Checkout del repositorio
       uses: actions/checkout@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}   # 👈 usa el token interno de GitHub
 
     - name: Instalar Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 20    # <-- FIX AQUÍ
+        node-version: 20
 
     - name: Instalar dependencias
-      run: npm install axios cheerio
+      run: npm install
 
     - name: Ejecutar scraper
       run: node scrape.js
 
-    - name: Commit y push
+    - name: Commit y subir feed actualizado
       run: |
-        git config --global user.email "action@github.com"
-        git config --global user.name "GitHub Action"
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
         git add feed.xml
-        git commit -m "RSS actualizado automáticamente" || echo "No hay cambios"
+        git commit -m "🔄 RSS actualizado automáticamente" || echo "Sin cambios que subir"
         git push
