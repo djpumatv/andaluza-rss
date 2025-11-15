@@ -43,5 +43,10 @@ async function scrape() {
     const homeImg = $(el).find(".team_left img").attr("src") || "";
     const awayImg = $(el).find(".team_right img").attr("src") || "";
 
-    const date = $(el).find(".date, .date-transform").text().trim();
-    const hour = $(el).find(".match_h_
+   const date = $(el).find(".date, .date-transform").text().trim();
+const hour = $(el).find(".match_hour").text().trim();
+
+const r1 = $(el).find(".r1").text().trim();
+const r2 = $(el).find(".r2").text().trim();
+const score = r1 && r2 ? `${r1} - ${r2}` : "";
+
