@@ -15,29 +15,45 @@ async function scrape() {
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125 Safari/537.36"
   );
 
-  console.log("Cargando página...");
+  console.log("🌐 Cargando página principal...");
   await page.goto(URL, { waitUntil: "networkidle2" });
 
-  // Esperar a que aparezca el bloque de resultados reales
-  await page.waitForSelector(".match-list-new a.match-link", { timeout: 10000 }).catch(() => {});
+  // Leer todas las jornadas
+  const jornadas = await page.$$eval("#season option", (opts) =>
+    opts.map((o) => ({
+      value: o.value,
+      text: o.textContent.trim(),
+      selected: o.hasAttribute("selected"),
+    }))
+  );
+
+  const actualIndex = jornadas.findIndex((j) => j.selected);
+  const siguiente = jornadas[actualIndex + 1];
+
+  if (!siguiente) {
+    console.log("⚠️ No hay una jornada siguiente disponible.");
+    await browser.close();
+    return;
+  }
+
+  console.log(`➡️ Jornada actual: ${jornadas[actualIndex].text}`);
+  console.log(`✅ Próxima jornada detectada: ${siguiente.text}`);
+
+  // Cambiar el selector a la próxima jornada
+  await page.select("#season", siguiente.value);
+  await page.waitForTimeout(3000);
 
   const html = await page.content();
-  console.log("HTML length:", html.length);
-
-  await browser.close();
-
   const $ = cheerio.load(html);
+
   const items = [];
 
-  // 🔍 Solo partidos dentro de la lista de resultados
-  $(".match-list-new a.match-link").each((i, el) => {
+  $(".match-link").each((i, el) => {
     const link = $(el).attr("href");
     if (!link) return;
 
     const home = $(el).find(".team_left .name").text().trim();
     const away = $(el).find(".team_right .name").text().trim();
-
-    // Evitar partidos vacíos o banners
     if (!home || !away) return;
 
     const homeImg = $(el).find(".team_left img").attr("src") || "";
@@ -50,64 +66,56 @@ async function scrape() {
     const r2 = $(el).find(".r2").text().trim();
     const score = r1 && r2 ? `${r1} - ${r2}` : "";
 
-    const minute = $(el).find(".minute, .liveMinute, .match_minute").text().trim();
-
     const statusRaw = $(el).find(".match-status-label b").text().trim();
     let status = "Programado";
     if (statusRaw === "Fin") status = "Finalizado";
     if (statusRaw === "En juego") status = "En juego";
 
-    // 🏷️ Construcción del título
     let title = `${home} vs ${away}`;
-    if (hour) title += ` — ${hour}`;
     if (score) title = `${home} ${score} ${away}`;
-    if (status === "En juego") {
-      title = `${home} ${score || ""} ${away} (En juego ${minute})`.trim();
-    }
+    if (status === "En juego") title += " (En juego)";
+    title += ` — ${date}`;
 
-    // 📝 Descripción
     let description = `
-        <b>${home}</b> vs <b>${away}</b><br>
-        📅 Fecha: ${date}<br>
+      <b>${home}</b> vs <b>${away}</b><br>
+      📅 Fecha: ${date}<br>
+      ⏰ Hora: ${hour || "Sin hora"}<br>
+      📌 Estado: ${status}<br>
     `;
 
-    if (hour) description += `⏰ Hora: ${hour}<br>`;
-    else description += `⏰ Hora: Sin hora<br>`;
-
-    description += `📌 Estado: ${status}<br>`;
-
     if (score) description += `⚽ Resultado: ${score}<br>`;
-    if (minute) description += `🕒 Minuto: ${minute}<br>`;
 
     description += `
-        <br>
-        <img src="${homeImg}" height="40">
-        <img src="${awayImg}" height="40">
+      <br>
+      <img src="${homeImg}" height="40">
+      <img src="${awayImg}" height="40">
     `;
 
     items.push(`
-        <item>
-            <title><![CDATA[${title}]]></title>
-            <link>${link}</link>
-            <description><![CDATA[${description}]]></description>
-            <guid>${link}</guid>
-        </item>
+      <item>
+        <title><![CDATA[${title}]]></title>
+        <link>${link}</link>
+        <description><![CDATA[${description}]]></description>
+        <guid>${link}</guid>
+      </item>
     `);
   });
 
+  await browser.close();
+
   const rss = `
-      <rss version="2.0">
-          <channel>
-              <title>Primera Andaluza Huelva G1 - RSS</title>
-              <link>${URL}</link>
-              <description>Resultados, partidos en vivo y próximos encuentros</description>
-              ${items.join("\n")}
-          </channel>
-      </rss>
+    <rss version="2.0">
+      <channel>
+        <title>Primera Andaluza Huelva G1 - Próxima Jornada</title>
+        <link>${URL}</link>
+        <description>Próximos partidos de la jornada ${siguiente.text}</description>
+        ${items.join("\n")}
+      </channel>
+    </rss>
   `;
 
   fs.writeFileSync("feed.xml", rss.trim());
-  console.log(`✔ RSS actualizado correctamente con ${items.length} partidos`);
+  console.log(`\n✅ RSS actualizado correctamente (${items.length} partidos de ${siguiente.text}).`);
 }
 
 scrape();
