@@ -1,127 +1,143 @@
 <rss version="2.0">
-          <channel>
-              <title>Primera Andaluza Huelva G1 - RSS</title>
-              <link>https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1</link>
-              <description>Resultados, partidos en vivo y próximos encuentros</description>
-              
-        <item>
-            <title><![CDATA[Isla Cristina 1 - 0 Ad Almonte Balompié]]></title>
-            <link>https://es.besoccer.com/partido/isla-cristina/ad-almonte-balompie-senior/2026135496</link>
-            <description><![CDATA[
-        <b>Isla Cristina</b> vs <b>Ad Almonte Balompié</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 1 - 0<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
+      <channel>
+        <title>Primera Andaluza Huelva G1 - Jornada 12</title>
+        <link>https://es.besoccer.com/competicion/resultados/andaluza/2026/grupo1</link>
+        <description>Partidos correspondientes a la Jornada 12</description>
+        
+      <item>
+        <title><![CDATA[Ad Almonte Balompié vs Riotinto Balompié — dentro de 3 días]]></title>
+        <link>https://es.besoccer.com/partido/ad-almonte-balompie-senior/riotinto-balompie/2026135498</link>
+        <description><![CDATA[
+      <b>Ad Almonte Balompié</b> vs <b>Riotinto Balompié</b><br>
+      📅 Fecha: dentro de 3 días<br>
+      ⏰ Hora: Sin hora<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
     ]]></description>
-            <guid>https://es.besoccer.com/partido/isla-cristina/ad-almonte-balompie-senior/2026135496</guid>
-        </item>
+        <guid>https://es.besoccer.com/partido/ad-almonte-balompie-senior/riotinto-balompie/2026135498</guid>
+      </item>
     
 
-        <item>
-            <title><![CDATA[Ayamonte 0 - 0 San Roque de Lepe B]]></title>
-            <link>https://es.besoccer.com/partido/ayamonte/cd-san-roque-lepe-b/2026135493</link>
-            <description><![CDATA[
-        <b>Ayamonte</b> vs <b>San Roque de Lepe B</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 0 - 0<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
+      <item>
+        <title><![CDATA[Atlético Calañas vs Ol. Valverdeña — dentro de 3 días]]></title>
+        <link>https://es.besoccer.com/partido/atletico-calanas-senior/olimpica-valverdena/2026135499</link>
+        <description><![CDATA[
+      <b>Atlético Calañas</b> vs <b>Ol. Valverdeña</b><br>
+      📅 Fecha: dentro de 3 días<br>
+      ⏰ Hora: Sin hora<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
     ]]></description>
-            <guid>https://es.besoccer.com/partido/ayamonte/cd-san-roque-lepe-b/2026135493</guid>
-        </item>
+        <guid>https://es.besoccer.com/partido/atletico-calanas-senior/olimpica-valverdena/2026135499</guid>
+      </item>
     
 
-        <item>
-            <title><![CDATA[Ol. Valverdeña 2 - 0 CD Canela]]></title>
-            <link>https://es.besoccer.com/partido/olimpica-valverdena/cd-canela-senior/2026135495</link>
-            <description><![CDATA[
-        <b>Ol. Valverdeña</b> vs <b>CD Canela</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 2 - 0<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
+      <item>
+        <title><![CDATA[CD Canela vs CD Bonares — dentro de 3 días]]></title>
+        <link>https://es.besoccer.com/partido/cd-canela-senior/c-d-f-b-bonares/2026135500</link>
+        <description><![CDATA[
+      <b>CD Canela</b> vs <b>CD Bonares</b><br>
+      📅 Fecha: dentro de 3 días<br>
+      ⏰ Hora: Sin hora<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
     ]]></description>
-            <guid>https://es.besoccer.com/partido/olimpica-valverdena/cd-canela-senior/2026135495</guid>
-        </item>
+        <guid>https://es.besoccer.com/partido/cd-canela-senior/c-d-f-b-bonares/2026135500</guid>
+      </item>
     
 
-        <item>
-            <title><![CDATA[Aroche CF 2 - 1 CD San Juan]]></title>
-            <link>https://es.besoccer.com/partido/aroche-c-f/cd-san-juan-senior/2026135491</link>
-            <description><![CDATA[
-        <b>Aroche CF</b> vs <b>CD San Juan</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 2 - 1<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
+      <item>
+        <title><![CDATA[CD Cerreño vs Isla Cristina — dentro de 3 días]]></title>
+        <link>https://es.besoccer.com/partido/c-d-cerreno/isla-cristina/2026135501</link>
+        <description><![CDATA[
+      <b>CD Cerreño</b> vs <b>Isla Cristina</b><br>
+      📅 Fecha: dentro de 3 días<br>
+      ⏰ Hora: Sin hora<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
     ]]></description>
-            <guid>https://es.besoccer.com/partido/aroche-c-f/cd-san-juan-senior/2026135491</guid>
-        </item>
+        <guid>https://es.besoccer.com/partido/c-d-cerreno/isla-cristina/2026135501</guid>
+      </item>
     
 
-        <item>
-            <title><![CDATA[Atlético Cruceño 3 - 2 Atlético Calañas]]></title>
-            <link>https://es.besoccer.com/partido/atletico-cruceno-senior/atletico-calanas-senior/2026135492</link>
-            <description><![CDATA[
-        <b>Atlético Cruceño</b> vs <b>Atlético Calañas</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 3 - 2<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
+      <item>
+        <title><![CDATA[Trigueros vs Cartaya B — dentro de 3 días]]></title>
+        <link>https://es.besoccer.com/partido/trigueros/cartaya-b-senior/2026135503</link>
+        <description><![CDATA[
+      <b>Trigueros</b> vs <b>Cartaya B</b><br>
+      📅 Fecha: dentro de 3 días<br>
+      ⏰ Hora: Sin hora<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
     ]]></description>
-            <guid>https://es.besoccer.com/partido/atletico-cruceno-senior/atletico-calanas-senior/2026135492</guid>
-        </item>
+        <guid>https://es.besoccer.com/partido/trigueros/cartaya-b-senior/2026135503</guid>
+      </item>
     
 
-        <item>
-            <title><![CDATA[Cartaya B 2 - 1 Pinzón CD]]></title>
-            <link>https://es.besoccer.com/partido/cartaya-b-senior/pinzon-cd/2026135490</link>
-            <description><![CDATA[
-        <b>Cartaya B</b> vs <b>Pinzón CD</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 2 - 1<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
+      <item>
+        <title><![CDATA[Pinzón CD vs Ayamonte — dentro de 3 días]]></title>
+        <link>https://es.besoccer.com/partido/pinzon-cd/ayamonte/2026135504</link>
+        <description><![CDATA[
+      <b>Pinzón CD</b> vs <b>Ayamonte</b><br>
+      📅 Fecha: dentro de 3 días<br>
+      ⏰ Hora: Sin hora<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
     ]]></description>
-            <guid>https://es.besoccer.com/partido/cartaya-b-senior/pinzon-cd/2026135490</guid>
-        </item>
+        <guid>https://es.besoccer.com/partido/pinzon-cd/ayamonte/2026135504</guid>
+      </item>
     
 
-        <item>
-            <title><![CDATA[CD Bonares 2 - 2 CD Cerreño]]></title>
-            <link>https://es.besoccer.com/partido/c-d-f-b-bonares/c-d-cerreno/2026135494</link>
-            <description><![CDATA[
-        <b>CD Bonares</b> vs <b>CD Cerreño</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 2 - 2<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
+      <item>
+        <title><![CDATA[San Roque de Lepe B vs Aroche CF — 23 NOV]]></title>
+        <link>https://es.besoccer.com/partido/cd-san-roque-lepe-b/aroche-c-f/2026135505</link>
+        <description><![CDATA[
+      <b>San Roque de Lepe B</b> vs <b>Aroche CF</b><br>
+      📅 Fecha: 23 NOV<br>
+      ⏰ Hora: 11:00<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
     ]]></description>
-            <guid>https://es.besoccer.com/partido/c-d-f-b-bonares/c-d-cerreno/2026135494</guid>
-        </item>
+        <guid>https://es.besoccer.com/partido/cd-san-roque-lepe-b/aroche-c-f/2026135505</guid>
+      </item>
     
 
-        <item>
-            <title><![CDATA[Riotinto Balompié 2 - 0 Trigueros]]></title>
-            <link>https://es.besoccer.com/partido/riotinto-balompie/trigueros/2026135497</link>
-            <description><![CDATA[
-        <b>Riotinto Balompié</b> vs <b>Trigueros</b><br>
-        📅 Fecha: 16 NOV 2025<br>
-    ⏰ Hora: Sin hora<br>📌 Estado: Finalizado<br>⚽ Resultado: 2 - 0<br>
-        <br>
-        <img src="" height="40">
-        <img src="" height="40">
-    ]]></description>
-            <guid>https://es.besoccer.com/partido/riotinto-balompie/trigueros/2026135497</guid>
-        </item>
+      <item>
+        <title><![CDATA[CD San Juan vs Atlético Cruceño — 23 NOV]]></title>
+        <link>https://es.besoccer.com/partido/cd-san-juan-senior/atletico-cruceno-senior/2026135502</link>
+        <description><![CDATA[
+      <b>CD San Juan</b> vs <b>Atlético Cruceño</b><br>
+      📅 Fecha: 23 NOV<br>
+      ⏰ Hora: 15:00<br>
+      📌 Estado: Programado<br>
     
-          </channel>
-      </rss>
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
+    ]]></description>
+        <guid>https://es.besoccer.com/partido/cd-san-juan-senior/atletico-cruceno-senior/2026135502</guid>
+      </item>
+    
+      </channel>
+    </rss>
