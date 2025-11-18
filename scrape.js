@@ -18,8 +18,11 @@ async function scrape() {
   console.log("🌐 Cargando página principal...");
   await page.goto(URL, { waitUntil: "networkidle2" });
 
-  // Leer todas las jornadas
-  const jornadas = await page.$$eval("#season option", (opts) =>
+  // Esperar el selector correcto de jornadas
+  await page.waitForSelector("select[data-cy='roundSelect']", { timeout: 10000 });
+
+  // Obtener las jornadas (solo del selector de jornadas, no temporada)
+  const jornadas = await page.$$eval("select[data-cy='roundSelect'] option", (opts) =>
     opts.map((o) => ({
       value: o.value,
       text: o.textContent.trim(),
@@ -39,9 +42,11 @@ async function scrape() {
   console.log(`➡️ Jornada actual: ${jornadas[actualIndex].text}`);
   console.log(`✅ Próxima jornada detectada: ${siguiente.text}`);
 
-  // Cambiar el selector a la próxima jornada
-  await page.select("#season", siguiente.value);
-  await page.waitForTimeout(3000);
+  // Cambiar al selector correcto
+  await page.select("select[data-cy='roundSelect']", siguiente.value);
+
+  // Esperar unos segundos (alternativa a waitForTimeout)
+  await new Promise((resolve) => setTimeout(resolve, 3000));
 
   const html = await page.content();
   const $ = cheerio.load(html);
@@ -106,9 +111,9 @@ async function scrape() {
   const rss = `
     <rss version="2.0">
       <channel>
-        <title>Primera Andaluza Huelva G1 - Próxima Jornada</title>
+        <title>Primera Andaluza Huelva G1 - ${siguiente.text}</title>
         <link>${URL}</link>
-        <description>Próximos partidos de la jornada ${siguiente.text}</description>
+        <description>Partidos correspondientes a la ${siguiente.text}</description>
         ${items.join("\n")}
       </channel>
     </rss>
