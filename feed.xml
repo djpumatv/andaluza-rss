@@ -5,23 +5,6 @@
         <description>Partidos correspondientes a la Jornada 19</description>
         
       <item>
-        <title><![CDATA[Cartaya B vs Isla Cristina — dentro de 4 días]]></title>
-        <link>https://es.besoccer.com/partido/cartaya-b-senior/isla-cristina/2026135554</link>
-        <description><![CDATA[
-      <b>Cartaya B</b> vs <b>Isla Cristina</b><br>
-      📅 Fecha: dentro de 4 días<br>
-      ⏰ Hora: Sin hora<br>
-      📌 Estado: Programado<br>
-    
-      <br>
-      <img src="" height="40">
-      <img src="" height="40">
-    ]]></description>
-        <guid>https://es.besoccer.com/partido/cartaya-b-senior/isla-cristina/2026135554</guid>
-      </item>
-    
-
-      <item>
         <title><![CDATA[Aroche CF vs Ol. Valverdeña — dentro de 4 días]]></title>
         <link>https://es.besoccer.com/partido/aroche-c-f/olimpica-valverdena/2026135555</link>
         <description><![CDATA[
@@ -35,40 +18,6 @@
       <img src="" height="40">
     ]]></description>
         <guid>https://es.besoccer.com/partido/aroche-c-f/olimpica-valverdena/2026135555</guid>
-      </item>
-    
-
-      <item>
-        <title><![CDATA[Ayamonte vs CD Bonares — dentro de 4 días]]></title>
-        <link>https://es.besoccer.com/partido/ayamonte/c-d-f-b-bonares/2026135556</link>
-        <description><![CDATA[
-      <b>Ayamonte</b> vs <b>CD Bonares</b><br>
-      📅 Fecha: dentro de 4 días<br>
-      ⏰ Hora: Sin hora<br>
-      📌 Estado: Programado<br>
-    
-      <br>
-      <img src="" height="40">
-      <img src="" height="40">
-    ]]></description>
-        <guid>https://es.besoccer.com/partido/ayamonte/c-d-f-b-bonares/2026135556</guid>
-      </item>
-    
-
-      <item>
-        <title><![CDATA[CD San Juan vs Atlético Calañas — dentro de 4 días]]></title>
-        <link>https://es.besoccer.com/partido/cd-san-juan-senior/atletico-calanas-senior/2026135557</link>
-        <description><![CDATA[
-      <b>CD San Juan</b> vs <b>Atlético Calañas</b><br>
-      📅 Fecha: dentro de 4 días<br>
-      ⏰ Hora: Sin hora<br>
-      📌 Estado: Programado<br>
-    
-      <br>
-      <img src="" height="40">
-      <img src="" height="40">
-    ]]></description>
-        <guid>https://es.besoccer.com/partido/cd-san-juan-senior/atletico-calanas-senior/2026135557</guid>
       </item>
     
 
@@ -137,6 +86,57 @@
       <img src="" height="40">
     ]]></description>
         <guid>https://es.besoccer.com/partido/cd-san-roque-lepe-b/cd-canela-senior/2026135561</guid>
+      </item>
+    
+
+      <item>
+        <title><![CDATA[Cartaya B vs Isla Cristina — 25 ENE]]></title>
+        <link>https://es.besoccer.com/partido/cartaya-b-senior/isla-cristina/2026135554</link>
+        <description><![CDATA[
+      <b>Cartaya B</b> vs <b>Isla Cristina</b><br>
+      📅 Fecha: 25 ENE<br>
+      ⏰ Hora: 11:00<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
+    ]]></description>
+        <guid>https://es.besoccer.com/partido/cartaya-b-senior/isla-cristina/2026135554</guid>
+      </item>
+    
+
+      <item>
+        <title><![CDATA[Ayamonte vs CD Bonares — 25 ENE]]></title>
+        <link>https://es.besoccer.com/partido/ayamonte/c-d-f-b-bonares/2026135556</link>
+        <description><![CDATA[
+      <b>Ayamonte</b> vs <b>CD Bonares</b><br>
+      📅 Fecha: 25 ENE<br>
+      ⏰ Hora: 11:00<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
+    ]]></description>
+        <guid>https://es.besoccer.com/partido/ayamonte/c-d-f-b-bonares/2026135556</guid>
+      </item>
+    
+
+      <item>
+        <title><![CDATA[CD San Juan vs Atlético Calañas — 25 ENE]]></title>
+        <link>https://es.besoccer.com/partido/cd-san-juan-senior/atletico-calanas-senior/2026135557</link>
+        <description><![CDATA[
+      <b>CD San Juan</b> vs <b>Atlético Calañas</b><br>
+      📅 Fecha: 25 ENE<br>
+      ⏰ Hora: 15:30<br>
+      📌 Estado: Programado<br>
+    
+      <br>
+      <img src="" height="40">
+      <img src="" height="40">
+    ]]></description>
+        <guid>https://es.besoccer.com/partido/cd-san-juan-senior/atletico-calanas-senior/2026135557</guid>
       </item>
     
       </channel>
